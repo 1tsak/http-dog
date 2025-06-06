@@ -60,7 +60,7 @@ export default function ListsPage() {
     setError('')
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`http-dog-ryhq.onrender.com/api/lists/${id}`, {
+      const res = await fetch(`https://http-dog-ryhq.onrender.com/api/lists/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -98,7 +98,7 @@ export default function ListsPage() {
     try {
       const token = localStorage.getItem('token')
       const imageLinks = editCodes.map(code => `https://http.dog/${code}.jpg`)
-      const res = await fetch(`http://localhost:8000/api/lists/${selected._id}`, {
+      const res = await fetch(`https://http-dog-ryhq.onrender.com/api/lists/${selected._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
