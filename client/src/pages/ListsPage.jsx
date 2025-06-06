@@ -29,7 +29,7 @@ export default function ListsPage() {
     try {
       const token = localStorage.getItem('token')
       if (!token) throw new Error('Not authenticated')
-      const res = await fetch('http://localhost:8000/api/lists', {
+      const res = await fetch('https://http-dog-ryhq.onrender.com/api/lists', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const data = await res.json()

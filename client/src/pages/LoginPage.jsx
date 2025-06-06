@@ -14,7 +14,7 @@ export default function AccountPage() {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch(`http://localhost:8000/api/auth/${isLogin ? 'login' : 'signup'}`, {
+      const res = await fetch(`https://http-dog-ryhq.onrender.com/api/auth/${isLogin ? 'login' : 'signup'}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

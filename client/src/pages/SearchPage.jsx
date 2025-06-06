@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const HTTP_CODES = [
-  // 1xx Informational responses
+  // 1xx Information responses
   '100','101','102','103',
   // 2xx Success
   '200','201','202','203','204','205','206','207','208','226',
@@ -25,7 +25,6 @@ function filterCodes(pattern) {
     return HTTP_CODES.filter(code => code === pattern)
   }
   
-  // Replace x with [0-9] for regex, handle case sensitivity
   let regexStr = '^' + pattern.replace(/x/gi, '[0-9]') + '$'
   
   try {
@@ -80,7 +79,7 @@ export default function SearchPage() {
       const token = localStorage.getItem('token')
       if (!token) throw new Error('Not authenticated')
       const imageLinks = codes.map(code => `https://http.dog/${code}.jpg`)
-      const res = await fetch('http://localhost:8000/api/lists', {
+      const res = await fetch('https://http-dog-ryhq.onrender.com/api/lists', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
