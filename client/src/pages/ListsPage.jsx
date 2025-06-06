@@ -60,7 +60,7 @@ export default function ListsPage() {
     setError('')
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`http://localhost:8000/api/lists/${id}`, {
+      const res = await fetch(`http-dog-ryhq.onrender.com/api/lists/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
