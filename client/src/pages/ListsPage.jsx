@@ -15,6 +15,7 @@ export default function ListsPage() {
   const [editing, setEditing] = useState(false)
   const [editName, setEditName] = useState('')
   const [editCodes, setEditCodes] = useState([])
+  const [editCodesInput, setEditCodesInput] = useState('')
   const [saving, setSaving] = useState(false)
   const [success, setSuccess] = useState('')
 
@@ -85,6 +86,7 @@ export default function ListsPage() {
     setEditing(true)
     setEditName(list.name)
     setEditCodes(list.codes)
+    setEditCodesInput(list.codes.join(','))
     setSelected(list)
     setSuccess('')
     setError('')
@@ -97,7 +99,9 @@ export default function ListsPage() {
     setSuccess('')
     try {
       const token = localStorage.getItem('token')
-      const imageLinks = editCodes.map(code => `https://http.dog/${code}.jpg`)
+      const codesArray = editCodesInput.split(',').map(s => s.trim()).filter(Boolean)
+      setEditCodes(codesArray)
+      const imageLinks = codesArray.map(code => `https://http.dog/${code}.jpg`)
       const res = await fetch(`https://http-dog-ryhq.onrender.com/api/lists/${selected._id}`, {
         method: 'PUT',
         headers: {
@@ -106,7 +110,7 @@ export default function ListsPage() {
         },
         body: JSON.stringify({
           name: editName,
-          codes: editCodes,
+          codes: codesArray,
           imageLinks
         })
       })
@@ -308,8 +312,8 @@ export default function ListsPage() {
                       <input
                         type="text"
                         className="w-full px-4 py-3 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500"
-                        value={editCodes.join(',')}
-                        onChange={e => setEditCodes(e.target.value.split(',').map(s => s.trim()).filter(Boolean))}
+                        value={editCodesInput}
+                        onChange={e => setEditCodesInput(e.target.value)}
                         required
                         placeholder="200, 404, 500..."
                       />
